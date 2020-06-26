@@ -14,10 +14,6 @@ COPY requirements_test.txt /home/pi/database/requirements.txt
 
 RUN pip install -r /home/pi/database/requirements.txt
 
-RUN python -m pip install PyMySQL
-
-RUN pip install git+https://github.com/GoogleCloudPlatform/cloud-sql-python-connector
-
 RUN git clone https://github.com/Seeed-Studio/grove.py
 
 WORKDIR grove.py
