@@ -1,4 +1,4 @@
-docker volume create agriculture
-docker volume create agriculture_logs
-docker build --rm -t agriculture -f Dockerfile .
-docker run --privileged -d -v agriculture:/home/pi/database -v agriculture_logs:/home/pi/logs agriculture
+docker volume create air
+docker volume create air_logs
+docker build --rm -t air -f Dockerfile .
+docker run --privileged -d -v air:/home/pi/database -v air_logs:/home/pi/logs air
