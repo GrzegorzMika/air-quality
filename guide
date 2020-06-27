@@ -1,0 +1,8 @@
+1. Allow conection to database from any port - in file 
+`/etc/mysql/mariadb.conf.d/50-server.cnf ` set `bind-address = 0.0.0.0`.
+2. Running the container add option `--add-host` as follows `docker run -d --add-host=database:172.17.0.1 --name node_container node_image`,
+ where the address is specified by the internal IP address of the container obtained via the command `ifconfig docker0`.
+3. Specify the host for database to be `database` (or whatever it was called in the step above).
+4. Install MySQL on Raspberry Pi: **https://pimylifeup.com/raspberry-pi-mysql/**
+5. Connect MySQL to Python:  **https://pynative.com/install-mysql-connector-python/**
+6. Some useful sites: **https://dev.mysql.com/doc/mysql-getting-started/en/**, **https://linuxize.com/post/how-to-create-mysql-user-accounts-and-grant-privileges/**

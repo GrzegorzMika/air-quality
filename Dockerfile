@@ -20,6 +20,8 @@ WORKDIR grove.py
 
 RUN pip install .
 
+COPY seeed_dht.py seeed_dht.py
+
 RUN mkdir /home/pi/logs
 
 WORKDIR /home/pi/database
