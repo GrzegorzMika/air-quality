@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-from grove.seeed_dht import DHT
+from seeed_dht import DHT
 
 
 class Sensor(metaclass=ABCMeta):
