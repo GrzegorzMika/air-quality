@@ -74,24 +74,9 @@ mycursor.execute("USE agriculture")
 for i in range(10):
     now = datetime.now()
     measurement = catch_measurement(moisture_sensor, 1, 1)
-    query = 'INSERT INTO moisture ( timestamp, moisture ) VALUES ( \"{}\", \"{}\" );'.format(str(now.strftime("%Y-%m-%d %H:%M:%S")),
-                                                                                     measurement)
+    query = 'INSERT INTO moisture ( timestamp, moisture ) VALUES ( \"{}\", \"{}\" );'.format(
+        str(now.strftime("%Y-%m-%d %H:%M:%S")),
+        measurement)
     print(query)
     mycursor.execute(query)
     mydb.commit()
-    
-# try:
-#     files = os.listdir(path)
-#     files = [f for f in files if 'test' in f]
-#     files = [f.split('.')[0] for f in files]
-#     files = [int(f.split('_')[1]) for f in files]
-#     run = max(files) + 1
-# except:
-#     run = 1
-#
-# with open(os.path.join(path, 'test_' + str(run) + '.txt'), 'w+') as f:
-#     f.write('Timestamp, Moisture\n')
-#
-# measurement = catch_measurement(sensor=moisture_sensor, period=60, wait=2)
-# save_measurement(measurement=measurement,
-#                  path=os.path.join(path, 'test_' + str(run) + '.txt'))

@@ -1,0 +1,12 @@
+{
+  "database": "air",
+  "username": "grzegorz",
+  "password": "loldupa77.",
+  "log_storage": "/home/pi/logs",
+  "period": 0.998,
+  "wait": 60,
+  "sensors": {
+    "temperature_port": 12,
+    "humidity_port": 12
+  }
+}
