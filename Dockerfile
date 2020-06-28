@@ -26,6 +26,6 @@ RUN mkdir /home/pi/logs
 
 WORKDIR /home/pi/database
 
-COPY main.py main.py
+COPY . .
 
 CMD python main.py
