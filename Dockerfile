@@ -26,6 +26,6 @@ RUN mkdir /home/pi/logs
 
 WORKDIR /home/pi/database
 
-COPY grove_test.py grove_test.py
+COPY main.py main.py
 
-CMD python grove_test.py
+CMD python main.py
