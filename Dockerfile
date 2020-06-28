@@ -28,6 +28,4 @@ WORKDIR /home/pi/database
 
 COPY . .
 
-RUN mv seeed_dht.py /home/pi/da
-
 CMD python main.py
