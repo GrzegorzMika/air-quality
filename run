@@ -1,4 +1,4 @@
 docker volume create air
 docker volume create air_logs
 docker build --rm -t air -f Dockerfile .
-docker run --privileged -d -v air:/home/pi/database -v air_logs:/home/pi/logs air
+docker run --privileged -d --add-host=database:172.17.0.1 -v air_logs:/home/pi/logs air
