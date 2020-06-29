@@ -3,10 +3,10 @@
   "username": "grzegorz",
   "password": "loldupa77.",
   "log_storage": "/home/pi/logs",
-  "period": 60,
-  "wait": 1.004,
+  "period": 90,
+  "wait": 0.95,
   "sensors": {
-    "temperature_port": 12,
-    "humidity_port": 12
+    "temperature_port": 22,
+    "humidity_port": 22
   }
 }

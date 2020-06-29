@@ -36,8 +36,6 @@ def main():
         now = datetime.now()
         now = str(now.strftime("%Y-%m-%d %H:%M:%S"))
 
-        print(humidity)
-
         query_humidity = 'INSERT INTO humidity ( timestamp, humidity ) VALUES ( \"{}\", \"{}\" );'.format(now, humidity)
         query_temperature = 'INSERT INTO temperature ( timestamp, temperature ) VALUES ( \"{}\", \"{}\" );'.format(now,
                                                                                                                    temperature)
