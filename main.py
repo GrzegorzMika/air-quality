@@ -24,28 +24,30 @@ def main():
     username = setup.get('username')
     password = setup.get('password')
 
-    mydb, mycursor = connect_database(username, password)
+    # mydb, mycursor = connect_database(username, password)
 
     humidity_sensor = Humidity(humidity_port)
     temperature_sensor = Temperature(temperature_port)
 
-    mycursor.execute("USE {}".format(database))
+    # mycursor.execute("USE {}".format(database))
 
-    while True:
+    for i in range(1):
+    # while True:
         humidity, temperature = catch_measurement(sensor=[humidity_sensor, temperature_sensor], period=period,
                                                   wait=wait)
 
         now = datetime.now()
         now = str(now.strftime("%Y-%m-%d %H:%M:%S"))
 
-        query_humidity = 'INSERT INTO humidity ( timestamp, humidity ) VALUES ( \"{}\", \"{}\" );'.format(now, humidity)
-        query_temperature = 'INSERT INTO temperature ( timestamp, temperature ) VALUES ( \"{}\", \"{}\" );'.format(now,
-                                                                                                                   temperature)
+        print(humidity)
 
-        mycursor.execute(query_humidity)
-        mycursor.execute(query_temperature)
-
-        mydb.commit()
+        # query_humidity = 'INSERT INTO humidity ( timestamp, humidity ) VALUES ( \"{}\", \"{}\" );'.format(now, humidity)
+        # query_temperature = 'INSERT INTO temperature ( timestamp, temperature ) VALUES ( \"{}\", \"{}\" );'.format(now,
+        #                                                                                                            temperature)
+        # mycursor.execute(query_humidity)
+        # mycursor.execute(query_temperature)
+        #
+        # mydb.commit()
 
 
 if __name__ == '__main__':
