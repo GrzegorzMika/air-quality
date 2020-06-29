@@ -4,7 +4,7 @@
   "password": "loldupa77.",
   "log_storage": "/home/pi/logs",
   "period": 60,
-  "wait": 0.998,
+  "wait": 1.01,
   "sensors": {
     "temperature_port": 12,
     "humidity_port": 12
