@@ -17,11 +17,12 @@ def find(name, path):
             return os.path.join(root, name)
 
 
-def connect_database(username, password, host='database'):
+def connect_database(username, password, database, host='localhost'):
     mydb = mysql.connector.connect(
         host=host,
         user=username,
-        password=password
+        password=password,
+        database=database
     )
     mycursor = mydb.cursor()
     return mydb, mycursor
