@@ -4,6 +4,10 @@ FROM arm32v7/python:3.5-buster
 RUN apt-get update && \
     apt-get install libpython3.5 -y
 
+ENV TZ=Europe/Warsaw
+
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
 RUN echo "deb https://seeed-studio.github.io/pi_repo/ stretch main" | tee /etc/apt/sources.list.d/seeed.list
 
 RUN curl https://seeed-studio.github.io/pi_repo/public.key | apt-key add -
