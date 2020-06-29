@@ -10,7 +10,7 @@ RUN curl https://seeed-studio.github.io/pi_repo/public.key | apt-key add -
 
 RUN apt-get update && apt install python-mraa python-upm python-rpi.gpio -y
 
-COPY requirements_test.txt /home/pi/database/requirements.txt
+COPY requirements.txt /home/pi/database/requirements.txt
 
 RUN pip install -r /home/pi/database/requirements.txt
 
