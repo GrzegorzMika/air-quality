@@ -3,8 +3,8 @@
   "username": "grzegorz",
   "password": "loldupa77.",
   "log_storage": "/home/pi/logs",
-  "period": 90,
-  "wait": 0.95,
+  "period": 180,
+  "wait": 1,
   "sensors": {
     "temperature_port": 22,
     "humidity_port": 22
