@@ -2,25 +2,16 @@ library(RMariaDB)
 library(dplyr)
 library(dbplyr)
 library(ggplot2)
-library(purrr)
 
 source("utils.R")
-# con <- getSQLconnection()
-# res <- dbListTables(con)
-# res <- dbSendQuery(con, "select * from humidity")
-# data <- dbFetch(res)
-# print(data)
-
-temperature <- tbl(con, "temperature")
-humidity <- tbl(con, "humidity")
 
 plot_temp <- function(start, stop) {
-  temperature %>%
+  tbl(con, "temperature") %>%
     filter(timestamp >= start & timestamp <= stop) %>%
     collect() %>%
     ggplot(aes(x = timestamp, y = temperature)) +
     geom_line() +
-    theme_classic() +
+    theme_bw() +
     theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0)) +
     labs(title = "Temperature") +
     xlab("Date") +
@@ -28,7 +19,7 @@ plot_temp <- function(start, stop) {
 }
 
 plot_hum <- function(start, stop) {
-  humidity %>%
+  tbl(con, "humidity") %>%
     filter(timestamp >= start & timestamp <= stop) %>%
     collect() %>%
     ggplot(aes(x = timestamp, y = humidity)) +
@@ -40,8 +31,7 @@ plot_hum <- function(start, stop) {
     ylab("%")
 }
 
-# plot_temp(as.Date('2020-06-30'), as.Date('2020-07-01'))
-plot_hum(as.Date("2020-06-30"), as.Date("2020-07-02"))
-
+plot_temp(as.Date("2020-07-01"), as.Date("2020-07-03"))
+plot_hum(as.Date("2020-07-01"), as.Date("2020-07-03"))
 
 dbDisconnect(con)
