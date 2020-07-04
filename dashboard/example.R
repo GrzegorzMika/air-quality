@@ -31,7 +31,7 @@ plot_hum <- function(start, stop) {
     ylab("%")
 }
 
-plot_temp(as.Date("2020-07-01"), as.Date("2020-07-03"))
-plot_hum(as.Date("2020-07-01"), as.Date("2020-07-03"))
+plot_temp(as.Date("2020-07-03"), as.Date("2020-07-08"))
+plot_hum(as.Date("2020-07-03"), as.Date("2020-07-08"))
 
 dbDisconnect(con)
