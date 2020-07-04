@@ -1,6 +1,12 @@
 library(shiny)
+library(RMariaDB)
+library(dplyr)
+library(dbplyr)
+library(ggplot2)
 
-shinyUI(fluidPage(
+source("utils.R")
+
+ui <- fluidPage(
   titlePanel("Air Quality"),
 
   sidebarLayout(
@@ -15,4 +21,17 @@ shinyUI(fluidPage(
       )
     )
   )
-))
+)
+
+server <- function(input, output) {
+  output$temperature <- renderPlot({
+    plot_temperature(input$date_start, input$date_end)
+  })
+
+  output$humidity <- renderPlot({
+    plot_humidity(input$date_start, input$date_end)
+  })
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)

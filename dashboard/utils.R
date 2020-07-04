@@ -8,7 +8,8 @@ getSQLconnection <- function() {
   con <- dbConnect(
     drv = RMariaDB::MariaDB(),
     username = "grzegorz",
-    password = rstudioapi::askForPassword("Database password"),
+    # password = rstudioapi::askForPassword("Database password"),
+    password = "loldupa77.",
     host = "192.168.1.103",
     db = "air"
   )
