@@ -11,8 +11,8 @@ ui <- fluidPage(
 
   sidebarLayout(
     sidebarPanel(
-      dateInput("date_start", "Start date:", value = "2020-06-29", weekstart = 1),
-      dateInput("date_end", "End date:", value = "2020-06-30", weekstart = 1),
+      dateInput("date_start", "Start date:", value = Sys.Date(), weekstart = 1),
+      dateInput("date_end", "End date:", value = Sys.Date(), weekstart = 1),
       textOutput("current_temperature"),
       textOutput("current_humidity")
     ),
@@ -33,10 +33,12 @@ server <- function(input, output) {
   })
   
   output$temperature <- renderPlot({
+    autoInvalidate()
     plot_temperature(input$date_start, as.Date(input$date_end) + 1)
   })
 
   output$humidity <- renderPlot({
+    autoInvalidate()
     plot_humidity(input$date_start, as.Date(input$date_end) + 1)
   })
   

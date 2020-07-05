@@ -8,9 +8,9 @@ library(purrr)
 getSQLconnection <- function() {
   con <- dbConnect(
     drv = RMariaDB::MariaDB(),
-    username = "grzegorz",
+    username = "dashboard",
     # password = rstudioapi::askForPassword("Database password"),
-    password = "loldupa77.",
+    password = "dashboard",
     host = "192.168.1.103",
     db = "air"
   )
@@ -29,7 +29,7 @@ plot_temperature <- function(start, stop) {
     theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0)) +
     labs(title = "Temperature") +
     xlab("Date") +
-    ylab("Celcious")
+    ylab("\u00B0C")
 }
 
 plot_humidity <- function(start, stop) {
@@ -50,7 +50,7 @@ get_current_temperature <- function() {
   temp <- dbFetch(query, n = 1) %>% flatten_dbl()
   dbClearResult(query)
 
-  paste0("Current temperature: ", round(temp, 2), " C")
+  paste0("Current temperature: ", round(temp, 1), "\u00B0C")
 }
 
 get_current_humidity <- function() {
@@ -58,5 +58,5 @@ get_current_humidity <- function() {
   hum <- dbFetch(query, n = 1) %>% flatten_dbl()
   dbClearResult(query)
 
-  paste0("Current humidity: ", round(hum, 2), " %")
+  paste0("Current humidity: ", round(hum, 1), "%")
 }
