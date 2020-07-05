@@ -46,21 +46,17 @@ plot_humidity <- function(start, stop) {
 }
 
 get_current_temperature <- function() {
-  temp <- tbl(con, "temperature") %>%
-    filter(timestamp == max(timestamp)) %>%
-    select(temperature) %>%
-    collect() %>%
-    flatten_dbl()
-  
-  paste0('Current temperature: ', round(temp, 2), ' C')
+  query <- dbSendQuery(con, "SELECT temperature FROM temperature ORDER BY timestamp DESC LIMIT 1")
+  temp <- dbFetch(query, n = 1) %>% flatten_dbl()
+  dbClearResult(query)
+
+  paste0("Current temperature: ", round(temp, 2), " C")
 }
 
 get_current_humidity <- function() {
-  hum <- tbl(con, "humidity") %>%
-    filter(timestamp == max(timestamp)) %>%
-    select(humidity) %>%
-    collect() %>%
-    flatten_dbl()
-  
-  paste0('Current humidity: ', round(hum, 2), ' %')
+  query <- dbSendQuery(con, "SELECT humidity FROM humidity ORDER BY timestamp DESC LIMIT 1")
+  hum <- dbFetch(query, n = 1) %>% flatten_dbl()
+  dbClearResult(query)
+
+  paste0("Current humidity: ", round(hum, 2), " %")
 }

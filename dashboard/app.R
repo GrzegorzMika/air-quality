@@ -28,6 +28,10 @@ ui <- fluidPage(
 server <- function(input, output) {
   autoInvalidate <- reactiveTimer(1000*60*5)
   
+  observe({
+    autoInvalidate()
+  })
+  
   output$temperature <- renderPlot({
     plot_temperature(input$date_start, as.Date(input$date_end) + 1)
   })
