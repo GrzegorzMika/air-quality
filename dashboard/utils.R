@@ -2,6 +2,7 @@ library(RMariaDB)
 library(dplyr)
 library(dbplyr)
 library(ggplot2)
+library(purrr)
 
 
 getSQLconnection <- function() {
@@ -42,4 +43,24 @@ plot_humidity <- function(start, stop) {
     labs(title = "Humidity") +
     xlab("Date") +
     ylab("%")
+}
+
+get_current_temperature <- function() {
+  temp <- tbl(con, "temperature") %>%
+    filter(timestamp == max(timestamp)) %>%
+    select(temperature) %>%
+    collect() %>%
+    flatten_dbl()
+  
+  paste0('Current temperature: ', round(temp, 2), ' C')
+}
+
+get_current_humidity <- function() {
+  hum <- tbl(con, "humidity") %>%
+    filter(timestamp == max(timestamp)) %>%
+    select(humidity) %>%
+    collect() %>%
+    flatten_dbl()
+  
+  paste0('Current humidity: ', round(hum, 2), ' %')
 }

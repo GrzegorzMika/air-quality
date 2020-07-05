@@ -1,6 +1,6 @@
 FROM rocker/shiny
 
-RUN R -e 'install.packages(c("shiny", "dplyr", "dbplyr", "ggplot2", "RMariaDB"))'
+RUN R -e 'install.packages(c("shiny", "dplyr", "dbplyr", "ggplot2", "purrr", "RMariaDB"))'
 
 RUN apt-get update && \
     apt-get install mariadb-server -y
