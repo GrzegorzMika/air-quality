@@ -21,8 +21,10 @@ def main():
     temperature_port = setup['sensors'].get('temperature_port')
 
     database = setup.get('database')
-    username = setup.get('username')
-    password = setup.get('password')
+    # username = setup.get('username')
+    # password = setup.get('password')
+    username = os.environ['MYSQL_USER']
+    password = os.environ['MYSQL_PASSWORD']
 
     mydb, mycursor = connect_database(username, password, database)
 
