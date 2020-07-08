@@ -1,7 +1,7 @@
 {
   "database": "air",
   "log_storage": "/home/pi/logs",
-  "period": 90,
+  "period": 18,
   "wait": 1,
   "sensors": {
     "temperature_port": 22,
