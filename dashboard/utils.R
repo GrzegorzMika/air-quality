@@ -1,7 +1,6 @@
 library(RMariaDB)
 library(ggplot2)
 library(purrr)
-library(RcppRoll)
 
 username <- Sys.getenv("MYSQL_USER")
 password <- Sys.getenv("MYSQL_PASSWORD")

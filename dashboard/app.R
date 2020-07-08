@@ -1,8 +1,4 @@
 library(shiny)
-library(RMariaDB)
-library(dplyr)
-library(dbplyr)
-library(ggplot2)
 
 source("utils.R")
 
@@ -14,7 +10,7 @@ ui <- fluidPage(
     sidebarPanel(
       dateInput("date_start", "Start date:", value = Sys.Date(), weekstart = 1),
       dateInput("date_end", "End date:", value = Sys.Date(), weekstart = 1),
-      sliderInput("smoothing", "Smoothing window in min:", value = 15, min = 1, max = 240),
+      sliderInput("smoothing", "Smoothing window in minutes:", value = 15, min = 1, max = 240),
       textOutput("current_temperature"),
       textOutput("current_humidity"),
 
