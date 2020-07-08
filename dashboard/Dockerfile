@@ -6,9 +6,7 @@ RUN apt-get update && \
 
 RUN R -e 'install.packages(c("shiny", "dplyr", "dbplyr", "ggplot2", "purrr", "RMariaDB"))'
 
-COPY app.R /app.R
-
-COPY utils.R /utils.R
+COPY . .
 
 EXPOSE 3838
 

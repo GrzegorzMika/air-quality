@@ -4,14 +4,17 @@ library(dbplyr)
 library(ggplot2)
 library(purrr)
 
+username = Sys.getenv('MYSQL_USER')
+password = Sys.getenv('MYSQL_PASSWORD')
+host = Sys.getenv('MYSQL_HOST')
 
-getSQLconnection <- function() {
+
+getSQLconnection <- function(username, password, host) {
   con <- dbConnect(
     drv = RMariaDB::MariaDB(),
-    username = "dashboard",
-    # password = rstudioapi::askForPassword("Database password"),
-    password = "dashboard",
-    host = "192.168.1.103",
+    username = username,
+    password = password,
+    host = host,
     db = "air"
   )
   return(con)
