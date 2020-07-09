@@ -17,11 +17,21 @@ def find(name, path):
             return os.path.join(root, name)
 
 
-def connect_database(username, password, database, host='localhost'):
+def connect_database(username, password, database, host, port="3306"):
+    """
+    Create connection to a MySQL database.
+    :param username: Name of the user
+    :param password: User's password
+    :param database: Name of the database to connect.
+    :param host: IP address of the MySQL server.
+    :param port: Port to which MySQL server is listening, default is 3306 (default MySQL server port)
+    :return: database connection object and database cursor object
+    """
     mydb = mysql.connector.connect(
         host=host,
         user=username,
         password=password,
+        port=port,
         database=database
     )
     mycursor = mydb.cursor()
