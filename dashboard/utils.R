@@ -72,7 +72,7 @@ get_current_temperature <- function() {
   temp <- dbFetch(query, n = 1) %>% flatten_dbl()
   dbClearResult(query)
 
-  paste0("Current temperature: ", round(temp, 1), "\u00B0C")
+  paste0("Temperature: ", round(temp, 1), "\u00B0C")
 }
 
 get_current_humidity <- function() {
@@ -82,5 +82,5 @@ get_current_humidity <- function() {
   hum <- dbFetch(query, n = 1) %>% flatten_dbl()
   dbClearResult(query)
 
-  paste0("Current humidity: ", round(hum, 1), "%")
+  paste0("Humidity: ", round(hum, 1), "%")
 }
