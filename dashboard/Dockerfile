@@ -8,6 +8,6 @@ RUN R -e 'install.packages(c("shiny", "shinyTime", "ggplot2", "purrr", "RMariaDB
 
 COPY . .
 
-EXPOSE 3838
+EXPOSE 3839
 
-CMD R -e 'shiny::runApp("app.R", port = 3838, host = "0.0.0.0")'
+CMD R -e 'shiny::runApp(".", port = 3839, host = "0.0.0.0")'
