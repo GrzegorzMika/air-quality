@@ -2,12 +2,9 @@ library(RMariaDB)
 library(ggplot2)
 library(purrr)
 
-# username <- Sys.getenv("MYSQL_USER")
-# password <- Sys.getenv("MYSQL_PASSWORD")
-# host <- Sys.getenv("MYSQL_HOST")
-username <- 'dashboard'
-password <- 'dashboard'
-host <- '192.168.1.103'
+username <- Sys.getenv("MYSQL_USER")
+password <- Sys.getenv("MYSQL_PASSWORD")
+host <- Sys.getenv("MYSQL_HOST")
 
 getSQLconnection <- function(username, password, host) {
   con <- dbConnect(
