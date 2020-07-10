@@ -28,13 +28,14 @@ body <- dashboardBody(
       timeInput("time_start", "Start time:", value = strptime("00:00:00", "%H:%M:%S"), seconds = FALSE),
       dateInput("date_end", "End date:", value = Sys.Date(), weekstart = 1),
       timeInput("time_end", "End time:", value = strptime("23:59:00", "%H:%M:%S"), seconds = FALSE),
-      sliderInput("smoothing", "Smoothing window in minutes:", value = 15, min = 1, max = 240)
+      sliderInput("smoothing", "Smoothing window (in minutes):", value = 15, min = 1, max = 240),
+      actionButton("reset_input", "Reset inputs")
     ),
     mainPanel(
       fluidRow(
         box(title = tags$p("Current conditions", style = "font-size: 32px; font-family: Times New Roman; font-weight: bold;"), 
             solidHeader = TRUE, collapsible = TRUE, width = NULL, collapsed = FALSE,
-          splitLayout(cellWidths = c("50%", "50%"), textOutput("current_temperature"), textOutput("current_humidity"))
+          splitLayout(cellWidths = c("15%", "15%"), textOutput("current_temperature"), textOutput("current_humidity"))
         ),
         box(
           collapsible = TRUE, width = NULL, collapsed = FALSE,
