@@ -33,8 +33,9 @@ body <- dashboardBody(
     ),
     mainPanel(
       fluidRow(
-        box(title = tags$p("Current conditions", style = "font-size: 32px; font-family: Times New Roman; font-weight: bold;"), 
-            solidHeader = TRUE, collapsible = TRUE, width = NULL, collapsed = FALSE,
+        box(
+          title = tags$p("Current conditions", style = "font-size: 32px; font-family: Times New Roman; font-weight: bold;"),
+          solidHeader = TRUE, collapsible = TRUE, width = NULL, collapsed = FALSE,
           splitLayout(cellWidths = c("15%", "15%"), textOutput("current_temperature"), textOutput("current_humidity"))
         ),
         box(
