@@ -22,10 +22,10 @@ CREATE TABLE IF NOT EXISTS temperature
 
 CREATE TABLE IF NOT EXISTS warnings
 (
-ID  TINYINT NOT NULL AUTO_INCREMENT,
-timestamp DATETIME NOT NULL,
-message VARCHAR(120),
-value   FLOAT NOT NULL,
+ID          INT NOT NULL AUTO_INCREMENT,
+timestamp   DATETIME NOT NULL,
+message     VARCHAR(120),
+value       FLOAT NOT NULL,
 PRIMARY KEY (ID)
 );
 
@@ -40,12 +40,6 @@ temperature_high VARCHAR(120),
 PRIMARY KEY (ID)
 );
 
-INSERT INTO messages
-    (humidity_low, humidity_high, temperature_low, temperature_high)
-VALUES (
-    "humidity_low", "humidity_high", "temperature_low", "temperature_high"
-);
-
 CREATE OR REPLACE TABLE thresholds
 (
 ID           TINYINT NOT NULL AUTO_INCREMENT,
@@ -56,8 +50,20 @@ temperature_high FLOAT NOT NULL,
 PRIMARY KEY (ID)
 );
 
-INSERT INTO thresholds
-    (humidity_low, humidity_high, temperature_low, temperature_high)
+-- DEFAULT VALUES
+
+INSERT INTO messages (
+    humidity_low, humidity_high, temperature_low, temperature_high)
+VALUES (
+
+    "humidity_low",
+    "humidity_high",
+    "temperature_low",
+    "temperature_high"
+);
+
+INSERT INTO thresholds (
+    humidity_low, humidity_high, temperature_low, temperature_high)
 VALUES (
     30, 80, 18, 30
 );
