@@ -65,7 +65,7 @@ VALUES (
 INSERT INTO thresholds (
     humidity_low, humidity_high, temperature_low, temperature_high)
 VALUES (
-    30, 80, 18, 30
+    30, 90, 18, 30
 );
 
 -- TRIGGERS

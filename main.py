@@ -43,10 +43,13 @@ def main():
         query_temperature = 'INSERT INTO temperature ( timestamp, temperature ) VALUES ( \"{}\", \"{}\" );'.format(
                                                                                                                 now,
                                                                                                                 temperature)
-        mycursor.execute(query_humidity)
-        mycursor.execute(query_temperature)
+        try:
+            mycursor.execute(query_humidity)
+            mycursor.execute(query_temperature)
 
-        mydb.commit()
+            mydb.commit()
+        except Exception as e:
+            logger.error(e)
 
 
 if __name__ == '__main__':
