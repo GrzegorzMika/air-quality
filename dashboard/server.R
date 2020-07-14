@@ -5,7 +5,6 @@ library(shinyTime)
 source("utils.R")
 
 shinyServer(function(input, output, session) {
-
   autoInvalidate <- reactiveTimer(1000 * 60 * 1)
   uiInvalidate <- reactiveTimer(1000 * 60)
 
@@ -23,6 +22,13 @@ shinyServer(function(input, output, session) {
     updateTimeInput(session, "time_end", value = strptime("23:59:00", "%H:%M:%S"))
   })
 
+  output$notificationsMenu <- renderMenu({
+    dropdownMenu(
+      type = "notifications",
+      .list = generate_notifications()
+    )
+  })
+
   output$temperature <- renderPlot({
     autoInvalidate()
     start <- strptime(paste(input$date_start, strftime(input$time_start, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT") # - 60 * 60 * 2
@@ -32,8 +38,8 @@ shinyServer(function(input, output, session) {
 
   output$humidity <- renderPlot({
     autoInvalidate()
-    start <- strptime(paste(input$date_start, strftime(input$time_start, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT")# - 60 * 60 * 2
-    end <- strptime(paste(input$date_end, strftime(input$time_end, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT")# - 60 * 60 * 2
+    start <- strptime(paste(input$date_start, strftime(input$time_start, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT") # - 60 * 60 * 2
+    end <- strptime(paste(input$date_end, strftime(input$time_end, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT") # - 60 * 60 * 2
     plot_humidity(start, end, input$smoothing)
   })
 
@@ -41,7 +47,7 @@ shinyServer(function(input, output, session) {
     autoInvalidate()
     get_current_time()
   })
-  
+
   output$current_temperature <- renderText({
     autoInvalidate()
     get_current_temperature()

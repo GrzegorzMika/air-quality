@@ -4,7 +4,7 @@ library(shinyTime)
 
 source("utils.R")
 
-header <- dashboardHeader(title = "Air Quality")
+header <- dashboardHeader(title = "Air Quality", dropdownMenuOutput("notificationsMenu"))
 
 sidebar <- dashboardSidebar(disable = TRUE)
 
