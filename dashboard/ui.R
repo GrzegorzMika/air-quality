@@ -20,6 +20,11 @@ body <- dashboardBody(
                                      font-size: 20px;
                                      font-style: italic;
                                      font-weight: bold;
+                                     }"),
+    tags$style("#current_time{color: black;
+                                     font-size: 20px;
+                                     font-style: italic;
+                                     font-weight: bold;
                                      }")
   ),
   sidebarLayout(
@@ -36,7 +41,7 @@ body <- dashboardBody(
         box(
           title = tags$p("Current conditions", style = "font-size: 32px; font-family: Times New Roman; font-weight: bold;"),
           solidHeader = TRUE, collapsible = TRUE, width = NULL, collapsed = FALSE,
-          splitLayout(cellWidths = c("15%", "15%"), textOutput("current_temperature"), textOutput("current_humidity"))
+          splitLayout(cellWidths = c("15%", "15%", "20%"), textOutput("current_temperature"), textOutput("current_humidity"), textOutput("current_time"))
         ),
         box(
           collapsible = TRUE, width = NULL, collapsed = FALSE,

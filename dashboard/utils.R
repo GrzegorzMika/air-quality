@@ -36,7 +36,8 @@ plot_temperature <- function(start, stop, smoothing) {
   ggplot(temperature_tbl, aes(x = timestamp, y = mv_temperature)) +
     geom_line() +
     theme_bw() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0)) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0),
+          text = element_text(size=14, face="bold")) +
     labs(title = "Temperature") +
     xlab("Date") +
     ylab("\u00B0C")
@@ -59,7 +60,8 @@ plot_humidity <- function(start, stop, smoothing) {
   ggplot(humidity_tbl, aes(x = timestamp, y = mv_humidity)) +
     geom_line() +
     theme_bw() +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0)) +
+    theme(axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0),
+          text = element_text(size=14, face="bold")) +
     labs(title = "Humidity") +
     xlab("Date") +
     ylab("%")
@@ -69,7 +71,7 @@ get_current_temperature <- function() {
   
   query <- dbSendQuery(con, "SELECT temperature FROM temperature ORDER BY timestamp DESC LIMIT 1")
   
-  temp <- dbFetch(query, n = 1) %>% flatten_dbl()
+  temp <- dbFetch(query, n = 1)
   dbClearResult(query)
 
   paste0("Temperature: ", round(temp, 1), "\u00B0C")
@@ -79,8 +81,18 @@ get_current_humidity <- function() {
   
   query <- dbSendQuery(con, "SELECT humidity FROM humidity ORDER BY timestamp DESC LIMIT 1")
   
-  hum <- dbFetch(query, n = 1) %>% flatten_dbl()
+  hum <- dbFetch(query, n = 1)
   dbClearResult(query)
 
   paste0("Humidity: ", round(hum, 1), "%")
+}
+
+get_current_time <- function() {
+  
+  query <- dbSendQuery(con, "SELECT timestamp FROM humidity ORDER BY timestamp DESC LIMIT 1")
+  
+  time <- dbFetch(query, n = 1)
+  dbClearResult(query)
+  
+  paste0("Last update time: ", format(time, "%H:%M:%S"))
 }

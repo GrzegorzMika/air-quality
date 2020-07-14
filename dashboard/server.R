@@ -37,6 +37,11 @@ shinyServer(function(input, output, session) {
     plot_humidity(start, end, input$smoothing)
   })
 
+  output$current_time <- renderText({
+    autoInvalidate()
+    get_current_time()
+  })
+  
   output$current_temperature <- renderText({
     autoInvalidate()
     get_current_temperature()
