@@ -2,12 +2,9 @@ library(RMariaDB)
 library(ggplot2)
 library(shiny)
 
-# username <- Sys.getenv("MYSQL_USER")
-# password <- Sys.getenv("MYSQL_PASSWORD")
-# host <- Sys.getenv("MYSQL_HOST")
-username <- "grzegorz"
-password <- "loldupa77."
-host <- "192.168.1.103"
+username <- Sys.getenv("MYSQL_USER")
+password <- Sys.getenv("MYSQL_PASSWORD")
+host <- Sys.getenv("MYSQL_HOST")
 
 NOTIFICATION_RANGE <- 1
 
@@ -31,8 +28,8 @@ generate_notifications <- function() {
 
   query <- paste0(
     'SELECT * 
-  FROM warnings
-  WHERE timestamp > "', strftime(strptime(Sys.time() - 60 * 60 * NOTIFICATION_RANGE, "%Y-%m-%d %H:%M:%S", "GMT")), '" AND timestamp < "',
+      FROM warnings
+      WHERE timestamp > "', strftime(strptime(Sys.time() - 60 * 60 * NOTIFICATION_RANGE, "%Y-%m-%d %H:%M:%S", "GMT")), '" AND timestamp < "',
     strftime(strptime(Sys.time(), "%Y-%m-%d %H:%M:%S", "GMT")), '";'
   )
 
@@ -40,14 +37,20 @@ generate_notifications <- function() {
   notifications <- dbFetch(q, n = -1)
   num <- dim(notifications)[1]
   dbClearResult(q)
-
+  notifications$timestamp <- as.POSIXct(strftime(notifications$timestamp, "%Y-%m-%d %H:%M:%S", "GMT", usetz=TRUE))
 
   if (num == 0) {
     return(list())
   } else {
     lapply(1:num, function(i) {
       notificationItem(
-        text = paste0("Threshold has been exeeded: ", notifications[i, "message"], ". Observed value: ", notifications[i, "value"]),
+        text = tags$div("Threshold has been exeeded:",
+          tags$br(),
+          notifications[i, "message"],
+          tags$br(),
+          "Observed value: ", notifications[i, "value"],
+          style = "display: inline-block; vertical-align: middle;"
+        ),
         icon("heartbeat"),
         status = "danger"
       )
@@ -67,6 +70,7 @@ plot_temperature <- function(start, stop, smoothing) {
   q <- dbSendQuery(con, query)
   temperature_tbl <- dbFetch(q, n = -1)
   dbClearResult(q)
+  temperature_tbl$timestamp <- as.POSIXct(strftime(temperature_tbl$timestamp, "%Y-%m-%d %H:%M:%S", "GMT", usetz=TRUE))
 
   ggplot(temperature_tbl, aes(x = timestamp, y = mv_temperature)) +
     geom_line() +
@@ -92,6 +96,7 @@ plot_humidity <- function(start, stop, smoothing) {
   q <- dbSendQuery(con, query)
   humidity_tbl <- dbFetch(q, n = -1)
   dbClearResult(q)
+  humidity_tbl$timestamp <- as.POSIXct(strftime(humidity_tbl$timestamp, "%Y-%m-%d %H:%M:%S", "GMT", usetz=TRUE))
 
   ggplot(humidity_tbl, aes(x = timestamp, y = mv_humidity)) +
     geom_line() +
@@ -106,7 +111,7 @@ plot_humidity <- function(start, stop, smoothing) {
 }
 
 get_current_temperature <- function() {
-  query <- dbSendQuery(con, "SELECT temperature FROM temperature ORDER BY timestamp DESC LIMIT 1")
+  query <- dbSendQuery(con, "SELECT temperature FROM temperature ORDER BY timestamp DESC LIMIT 1;")
 
   temp <- dbFetch(query, n = 1)
   dbClearResult(query)
@@ -115,7 +120,7 @@ get_current_temperature <- function() {
 }
 
 get_current_humidity <- function() {
-  query <- dbSendQuery(con, "SELECT humidity FROM humidity ORDER BY timestamp DESC LIMIT 1")
+  query <- dbSendQuery(con, "SELECT humidity FROM humidity ORDER BY timestamp DESC LIMIT 1;")
 
   hum <- dbFetch(query, n = 1)
   dbClearResult(query)
@@ -124,10 +129,10 @@ get_current_humidity <- function() {
 }
 
 get_current_time <- function() {
-  query <- dbSendQuery(con, "SELECT timestamp FROM humidity ORDER BY timestamp DESC LIMIT 1")
+  query <- dbSendQuery(con, "SELECT timestamp FROM humidity ORDER BY timestamp DESC LIMIT 1;")
 
   time <- dbFetch(query, n = 1)
   dbClearResult(query)
 
-  paste0("Last update time: ", format(time, "%H:%M:%S"))
+  paste0("Last update time: ", format(strptime(strftime(time$timestamp, "%H:%M:%S", "GMT", usetz=TRUE), "%H:%M:%S"), "%H:%M:%S"))
 }

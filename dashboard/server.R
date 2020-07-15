@@ -31,15 +31,15 @@ shinyServer(function(input, output, session) {
 
   output$temperature <- renderPlot({
     autoInvalidate()
-    start <- strptime(paste(input$date_start, strftime(input$time_start, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT") # - 60 * 60 * 2
-    end <- strptime(paste(input$date_end, strftime(input$time_end, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT") # - 60 * 60 * 2
+    start <- paste(input$date_start, strftime(input$time_start, "%H:%M:%S", usetz = TRUE))
+    end <- paste(input$date_end, strftime(input$time_end, "%H:%M:%S", usetz = TRUE))
     plot_temperature(start, end, input$smoothing)
   })
 
   output$humidity <- renderPlot({
     autoInvalidate()
-    start <- strptime(paste(input$date_start, strftime(input$time_start, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT") # - 60 * 60 * 2
-    end <- strptime(paste(input$date_end, strftime(input$time_end, "%H:%M:%S", usetz = FALSE)), "%Y-%m-%d %H:%M:%S", "GMT") # - 60 * 60 * 2
+    start <- paste(input$date_start, strftime(input$time_start, "%H:%M:%S", usetz = TRUE))
+    end <- paste(input$date_end, strftime(input$time_end, "%H:%M:%S", usetz = TRUE))
     plot_humidity(start, end, input$smoothing)
   })
 
