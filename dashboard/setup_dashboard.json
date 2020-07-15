@@ -1,0 +1,9 @@
+{
+  "database": "air",
+  "notification_range": 1,
+  "notification_duration": 15,
+  "default_smoothing": 15,
+  "autoInvalidate": 1,
+  "uiInvalidate": 60,
+  "notificationsInvalidate": 1
+}

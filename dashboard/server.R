@@ -5,9 +5,6 @@ library(shinyTime)
 source("utils.R")
 
 shinyServer(function(input, output, session) {
-  autoInvalidate <- reactiveTimer(1000 * 60 * 1)
-  uiInvalidate <- reactiveTimer(1000 * 60)
-
   observe({
     autoInvalidate()
   })
@@ -17,7 +14,7 @@ shinyServer(function(input, output, session) {
     input$reset_input
     updateDateInput(session, "date_start", value = Sys.Date())
     updateDateInput(session, "date_end", value = Sys.Date())
-    updateSliderInput(session, "smoothing", value = 15, min = 1, max = 240)
+    updateSliderInput(session, "smoothing", value = SMOOTHING, min = 1, max = 240)
     updateTimeInput(session, "time_start", value = strptime("00:00:00", "%H:%M:%S"))
     updateTimeInput(session, "time_end", value = strptime("23:59:00", "%H:%M:%S"))
   })
@@ -27,6 +24,11 @@ shinyServer(function(input, output, session) {
       type = "notifications",
       .list = generate_notifications()
     )
+  })
+  
+  observe({
+    notificationsInvalidate()
+    get_new_warning()
   })
 
   output$temperature <- renderPlot({
