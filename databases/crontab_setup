@@ -1,2 +1,2 @@
 # perform a backup every Tuesday 5 pm
-0 17 * * 2 bash air-quality/backup.sh
+0 17 * * 2 bash air-quality/databases/backup.sh
