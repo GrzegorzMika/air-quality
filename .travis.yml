@@ -11,8 +11,11 @@ matrix:
       r:
         - oldrel
         - release
+      cache: packages
       before_script:
         - cd dashboard
+      install:
+        - R -e 'install.packages(c("devtools","roxygen2","testthat"));devtools::install_deps("dashboard")'
       script:
         - R -e "devtools::test()"
 
