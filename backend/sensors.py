@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 
-from seeed_dht import DHT
+from backend.seeed_dht import DHT
 
 
 class Sensor(metaclass=ABCMeta):

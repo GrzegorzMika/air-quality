@@ -1,0 +1,24 @@
+Package: dashboard
+Title: Interactive presentation of air quality data
+Version: 0.1.0
+Authors@R: 
+    person(given = "Grzegorz",
+           family = "Mika",
+           role = c("aut", "cre"),
+           email = "g.w.mika@gmail.com",
+           comment = c(ORCID = "0000-0001-5272-6055"))
+Description: What the package does (one paragraph).
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    shiny,
+    shinyTime,
+    shinydashboard,
+    ggplot2,
+    jsonlite,
+    RMariaDB
+Suggests: 
+    testthat

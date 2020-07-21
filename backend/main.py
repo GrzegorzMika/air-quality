@@ -3,8 +3,8 @@ import logging
 import os
 
 from datetime import datetime
-from sensors import Humidity, Temperature
-from utils import find, connect_database, catch_measurement
+from backend.sensors import Humidity, Temperature
+from backend.utils import find, connect_database, catch_measurement
 
 
 def main():

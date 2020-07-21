@@ -30,6 +30,6 @@ RUN mkdir /home/pi/logs
 
 WORKDIR /home/pi/database
 
-COPY . .
+COPY .. .
 
 CMD python main.py

@@ -1,0 +1,21 @@
+matrix:
+  include:
+    - language: python
+      python: 3.5
+      before_script:
+        - cd backend/tests
+      script:
+        - python -m unittest discover
+
+    - language: r
+      r:
+        - oldrel
+        - release
+      before_script:
+        - cd dashboard/tests
+      script:
+        - R -e "devtools::test()"
+
+notifications:
+  email:
+    - g.w.mika@gmail.com
