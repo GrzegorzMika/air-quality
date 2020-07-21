@@ -12,7 +12,7 @@ matrix:
         - oldrel
         - release
       before_script:
-        - cd dashboard/tests
+        - cd dashboard
       script:
         - R -e "devtools::test()"
 
