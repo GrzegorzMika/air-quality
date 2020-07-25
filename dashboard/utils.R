@@ -1,13 +1,17 @@
 library(RMariaDB)
 library(ggplot2)
 library(shiny)
+library(scales)
 library(jsonlite)
 
 ####### database credentials ######
 
-username <- Sys.getenv("MYSQL_USER")
-password <- Sys.getenv("MYSQL_PASSWORD")
-host <- Sys.getenv("MYSQL_HOST")
+# username <- Sys.getenv("MYSQL_USER")
+# password <- Sys.getenv("MYSQL_PASSWORD")
+# host <- Sys.getenv("MYSQL_HOST")
+username <- 'dashboard'
+password <- 'dashboard'
+host <- '192.168.1.103'
 
 ####### parameters ######
 
@@ -125,11 +129,12 @@ plot_temperature <- function(start, stop, smoothing) {
     theme_bw() +
     theme(
       axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0),
-      text = element_text(size = 14, face = "bold")
+      text = element_text(size = 16, face = "bold")
     ) +
     labs(title = "Temperature") +
     xlab("Date") +
-    ylab("\u00B0C")
+    ylab("\u00B0C") + 
+    scale_x_datetime(breaks = pretty_breaks(n = 10))
 }
 
 plot_humidity <- function(start, stop, smoothing) {
@@ -151,11 +156,12 @@ plot_humidity <- function(start, stop, smoothing) {
     theme_bw() +
     theme(
       axis.text.x = element_text(angle = 90, vjust = 0, hjust = 0),
-      text = element_text(size = 14, face = "bold")
+      text = element_text(size = 16, face = "bold")
     ) +
     labs(title = "Humidity") +
     xlab("Date") +
-    ylab("%")
+    ylab("%") + 
+    scale_x_datetime(breaks = pretty_breaks(n = 10))
 }
 
 get_current_temperature <- function() {

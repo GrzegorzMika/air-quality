@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get install mariadb-server -y && \
     apt-get install libv8-dev -y
 
-RUN R -e 'install.packages(c("shiny", "shinyTime",  "shinydashboard", "ggplot2", "jsonlite", "RMariaDB"))'
+RUN R -e 'install.packages(c("shiny", "shinyTime",  "shinydashboard", "scales", "ggplot2", "jsonlite", "RMariaDB"))'
 
 ENV TZ=Europe/Warsaw
 
