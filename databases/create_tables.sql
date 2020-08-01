@@ -56,10 +56,10 @@ INSERT INTO messages (
     humidity_low, humidity_high, temperature_low, temperature_high)
 VALUES (
 
-    "humidity_low",
-    "humidity_high",
-    "temperature_low",
-    "temperature_high"
+    "Humidity is too low!",
+    "Humidity is too high!",
+    "Temperature is too low!",
+    "Temperature is too high!"
 );
 
 INSERT INTO thresholds (
@@ -78,8 +78,8 @@ BEGIN
    DECLARE threshold float;
    DECLARE message varchar(120);
    DECLARE new_value float;
-   SELECT temperature_high from thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
-   SELECT temperature_high from messages ORDER BY ID DESC LIMIT 1 INTO message;
+   SELECT temperature_high FROM thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
+   SELECT temperature_high FROM messages ORDER BY ID DESC LIMIT 1 INTO message;
    SELECT NEW.temperature INTO new_value;
    IF (new_value > threshold)
    THEN
@@ -103,8 +103,8 @@ BEGIN
    DECLARE threshold float;
    DECLARE message varchar(120);
    DECLARE new_value float;
-   SELECT temperature_low from thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
-   SELECT temperature_low from messages ORDER BY ID DESC LIMIT 1 INTO message;
+   SELECT temperature_low FROM thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
+   SELECT temperature_low FROM messages ORDER BY ID DESC LIMIT 1 INTO message;
    SELECT NEW.temperature INTO new_value;
    IF (new_value < threshold)
    THEN
@@ -128,8 +128,8 @@ BEGIN
    DECLARE threshold float;
    DECLARE message varchar(120);
    DECLARE new_value float;
-   SELECT humidity_high from thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
-   SELECT humidity_high from messages ORDER BY ID DESC LIMIT 1 INTO message;
+   SELECT humidity_high FROM thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
+   SELECT humidity_high FROM messages ORDER BY ID DESC LIMIT 1 INTO message;
    SELECT NEW.humidity INTO new_value;
    IF (new_value > threshold)
    THEN
@@ -153,8 +153,8 @@ BEGIN
    DECLARE threshold float;
    DECLARE message varchar(120);
    DECLARE new_value float;
-   SELECT humidity_low from thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
-   SELECT humidity_low from messages ORDER BY ID DESC LIMIT 1 INTO message;
+   SELECT humidity_low FROM thresholds ORDER BY ID DESC LIMIT 1 INTO threshold;
+   SELECT humidity_low FROM messages ORDER BY ID DESC LIMIT 1 INTO message;
    SELECT NEW.humidity INTO new_value;
    IF (new_value < threshold)
    THEN
