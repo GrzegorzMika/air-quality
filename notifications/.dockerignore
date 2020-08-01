@@ -1,0 +1,10 @@
+/grove/
+/data/
+/.ipynb_checkpoints/
+*.ipynb
+/__pycache__/
+/.idea/
+/.git/
+/dashboard/
+/databases/
+/tests/

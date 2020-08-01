@@ -1,0 +1,4 @@
+{
+  "database": "air",
+  "log_storage": "/home/pi/logs"
+}
