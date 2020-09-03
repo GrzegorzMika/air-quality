@@ -34,7 +34,7 @@ body <- dashboardBody(
       dateInput("date_end", "End date:", value = Sys.Date(), weekstart = 1),
       timeInput("time_end", "End time:", value = strptime("23:59:00", "%H:%M:%S"), seconds = FALSE),
       sliderInput("smoothing", "Smoothing window (in minutes):", value = SMOOTHING, min = 1, max = 240),
-      actionButton("reset_input", "Reset inputs")
+      actionButton("reset_input", "Reset")
     ),
     mainPanel(
       fluidRow(

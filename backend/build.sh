@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker volume create air_logs
 docker build --rm -t air -f Dockerfile .
 docker run -d \

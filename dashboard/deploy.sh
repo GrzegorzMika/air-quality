@@ -1,3 +1,5 @@
+#!/bin/bash
+
 docker build --rm -t dashboard -f Dockerfile .
 docker run -d \
           --network=host \

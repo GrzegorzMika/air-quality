@@ -6,12 +6,9 @@ library(jsonlite)
 
 ####### database credentials ######
 
-# username <- Sys.getenv("MYSQL_USER")
-# password <- Sys.getenv("MYSQL_PASSWORD")
-# host <- Sys.getenv("MYSQL_HOST")
-username <- 'dashboard'
-password <- 'dashboard'
-host <- '192.168.1.103'
+username <- Sys.getenv("MYSQL_USER")
+password <- Sys.getenv("MYSQL_PASSWORD")
+host <- Sys.getenv("MYSQL_HOST")
 
 ####### parameters ######
 
