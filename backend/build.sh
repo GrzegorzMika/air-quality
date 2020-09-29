@@ -8,5 +8,5 @@ docker run -d \
         -v air_logs:/home/pi/logs \
         -e MYSQL_USER='grzegorz' \
         -e MYSQL_PASSWORD='loldupa77.' \
-        -e MYSQL_HOST='192.168.1.103' \
+        -e MYSQL_HOST='192.168.1.100' \
         air
