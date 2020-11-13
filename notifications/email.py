@@ -1,4 +1,3 @@
-import configparser
 import logging
 import os
 import smtplib
@@ -17,17 +16,15 @@ def find(name, path):
             return os.path.join(root, name)
 
 
-def _credentials(filename='emails.ini'):
-    config = configparser.ConfigParser()
-    config.read(find(filename, '../..'))
-    user = config['EMAIL']['user']
-    password = config['EMAIL']['password']
+def email_credentials():
+    user = os.environ['AIR_QUALITY_USER']
+    password = os.environ['AIR_QUALITY_PASSWORD']
 
     return user, password
 
 
 def compose_email(to, subject):
-    user, _ = _credentials()
+    user, _ = email_credentials()
     content = _write_email_content()
 
     msg = EmailMessage()
@@ -44,22 +41,12 @@ def _write_email_content():
 
 
 def send_email(message):
-    user, psswd = _credentials()
+    user, password = email_credentials()
 
     try:
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            print(user,  psswd)
-            smtp.login(user, psswd)
+            smtp.login(user, password)
             smtp.send_message(message)
         logging.info('Message sent successfully.')
     except Exception as e:
         logging.error(e)
-
-
-def main():
-    message = compose_email('g.w.mika@gmail.com', 'Script')
-    send_email(message)
-
-
-if __name__ == '__main__':
-    main()

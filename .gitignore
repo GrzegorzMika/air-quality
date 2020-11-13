@@ -131,3 +131,5 @@ dmypy.json
 /.idea
 .Rproj.user
 /dashboard/.Rhistory
+
+*.ini
