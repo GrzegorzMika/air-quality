@@ -3,9 +3,9 @@ import logging
 import os
 
 from twisted.internet import task, reactor
-from .email import compose_email, send_email
-from .server import observe, check_if_sent, store_info, sql_credentials, connect_database
-from .utils import find
+from email_utils import compose_email, send_email
+from server import observe, check_if_sent, store_info, sql_credentials, connect_database
+from utils import find
 
 
 def notification_logic(mydb, cursor, database, sensor, lower_threshold, upper_threshold, relaxation, to):
@@ -20,8 +20,8 @@ def main():
     with open(find('mail_setup.json', '/')) as f:
         setup = json.load(f)
 
-    # logging.basicConfig(filename=os.path.join(setup.get('log_storage'), 'log.log'), level=logging.INFO,
-    #                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(filename=os.path.join(setup.get('log_storage'), 'log.log'), level=logging.INFO,
+                        format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
     to = setup.get('to')
     wait = setup.get('wait')
