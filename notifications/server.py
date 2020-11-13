@@ -1,3 +1,4 @@
+import logging
 import os
 import re
 from datetime import datetime, timedelta
@@ -56,10 +57,44 @@ def check_if_sent(cursor, database, sensor, relaxation):
             "ORDER BY timestamp DESC" \
             "LIMIT 1".format(database, sensor, time_shift)
 
-    cursor.execute(query)
-    results = cursor.fetchall()
+    try:
+        cursor.execute(query)
+        results = cursor.fetchall()
+    except Exception as e:
+        logging.error(e)
+        results = []
 
     if results:
         return True
     else:
         return False
+
+
+def store_info(cursor, sensor):
+    time = datetime.now()
+    info = 'Notification sent!'
+    query = "INSERT INTO notifications (timestamp, sensor, info) VALUES ({}, {}, {})".format(time, sensor, info)
+
+    try:
+        cursor.execute(query)
+        cursor.commit()
+    except Exception as e:
+        logging.error(e)
+
+
+def observe(cursor, database, sensor, lower_threshold, upper_threshold):
+    query = "SELECT * " \
+            "FROM {}.{}" \
+            "ORDER BY timestamp DESC" \
+            "LIMIT 1".format(database, sensor)
+
+    try:
+        cursor.execute(query)
+        results = cursor.fetchall()
+    except Exception as e:
+        logging.error(e)
+        results = [datetime.now, -1]
+
+    value = results[1]
+
+    return value < lower_threshold or value > upper_threshold, value
