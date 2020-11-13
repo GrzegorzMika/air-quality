@@ -53,10 +53,9 @@ def check_if_sent(cursor, database, sensor, relaxation):
 
     query = "SELECT * " \
             "FROM {}.notifications " \
-            "WHERE sensor = {} AND timestamp >= {}" \
-            "ORDER BY timestamp DESC" \
+            "WHERE sensor = \"{}\" AND timestamp >= \"{}\" " \
+            "ORDER BY timestamp DESC " \
             "LIMIT 1".format(database, sensor, time_shift)
-
     try:
         cursor.execute(query)
         results = cursor.fetchall()
@@ -70,22 +69,22 @@ def check_if_sent(cursor, database, sensor, relaxation):
         return False
 
 
-def store_info(cursor, sensor):
+def store_info(mydb, cursor, sensor):
     time = datetime.now()
     info = 'Notification sent!'
-    query = "INSERT INTO notifications (timestamp, sensor, info) VALUES ({}, {}, {})".format(time, sensor, info)
+    query = "INSERT INTO notifications (timestamp, sensor, info) VALUES (\"{}\", \"{}\", \"{}\")".format(time, sensor, info)
 
     try:
         cursor.execute(query)
-        cursor.commit()
+        mydb.commit()
     except Exception as e:
         logging.error(e)
 
 
 def observe(cursor, database, sensor, lower_threshold, upper_threshold):
     query = "SELECT * " \
-            "FROM {}.{}" \
-            "ORDER BY timestamp DESC" \
+            "FROM {}.{} " \
+            "ORDER BY timestamp DESC " \
             "LIMIT 1".format(database, sensor)
 
     try:
@@ -95,6 +94,6 @@ def observe(cursor, database, sensor, lower_threshold, upper_threshold):
         logging.error(e)
         results = [datetime.now, -1]
 
-    value = results[1]
+    value = results[0][1]
 
     return value < lower_threshold or value > upper_threshold, value

@@ -11,9 +11,9 @@ def email_credentials():
     return user, password
 
 
-def compose_email(to, subject):
+def compose_email(to, subject, sensor, value):
     user, _ = email_credentials()
-    content = _write_email_content()
+    content = _write_email_content(sensor, value)
 
     msg = EmailMessage()
     msg['Subject'] = subject
@@ -24,8 +24,8 @@ def compose_email(to, subject):
     return msg
 
 
-def _write_email_content():
-    return 'This is email content.'
+def _write_email_content(sensor, value):
+    return 'Level for sensor {} has been crossed. Measured value: {}'.format(sensor, value)
 
 
 def send_email(message):
