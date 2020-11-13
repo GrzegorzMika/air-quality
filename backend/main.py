@@ -4,7 +4,7 @@ import os
 
 from datetime import datetime
 from sensors import Humidity, Temperature
-from utils import find, connect_database, catch_measurement
+from utils import find, connect_database, catch_measurement, credentials
 
 
 def main():
@@ -21,10 +21,7 @@ def main():
     temperature_port = setup['sensors'].get('temperature_port')
 
     database = setup.get('database')
-    username = os.environ['MYSQL_USER']
-    password = os.environ['MYSQL_PASSWORD']
-    host = os.environ['MYSQL_HOST']
-
+    username, password, host = credentials()
     mydb, mycursor = connect_database(username, password, database, host)
 
     humidity_sensor = Humidity(humidity_port)

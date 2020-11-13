@@ -5,6 +5,18 @@ from collections import defaultdict
 import mysql.connector
 
 
+def credentials():
+    """
+    Load SQL server login credentials and the IP address from environmental variables.
+    :return: Name, password and IP address of the SQL server.
+    """
+    user = os.environ['MYSQL_USER']
+    password = os.environ['MYSQL_PASSWORD']
+    host = os.environ['MYSQL_HOST']
+
+    return user, password, host
+
+
 def find(name, path):
     """
     Find a file specified by name starting from path.
