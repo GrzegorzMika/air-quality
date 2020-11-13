@@ -2,5 +2,6 @@
   "database": "air",
   "log_storage": "/home/pi/logs",
   "observed": "Humidity",
-  "to": ["g.w.mika@gmail.com"]
+  "to": ["g.w.mika@gmail.com"],
+  "relaxation": "01:00:00"
 }

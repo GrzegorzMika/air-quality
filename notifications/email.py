@@ -4,18 +4,6 @@ import smtplib
 from email.message import EmailMessage
 
 
-def find(name, path):
-    """
-    Find a file specified by name starting from path.
-    :param name: name of the file to be found
-    :param path: starting location
-    :return: path to the file starting from path
-    """
-    for root, dirs, files in os.walk(path):
-        if name in files:
-            return os.path.join(root, name)
-
-
 def email_credentials():
     user = os.environ['AIR_QUALITY_USER']
     password = os.environ['AIR_QUALITY_PASSWORD']
