@@ -18,36 +18,46 @@ CREATE TABLE IF NOT EXISTS temperature
   PRIMARY KEY     (timestamp)
 );
 
+-- NOTIFICATIONS
+
+CREATE TABLE IF NOT EXISTS notifications
+(
+    timestamp    DATETIME NOT NULL,
+    sensor       VARCHAR(120),
+    info         VARCHAR(255),
+    PRIMARY KEY  (timestamp)
+);
+
 -- AUXILIARY TABLES
 
 CREATE TABLE IF NOT EXISTS warnings
 (
-ID          INT NOT NULL AUTO_INCREMENT,
-timestamp   DATETIME NOT NULL,
-message     VARCHAR(120),
-value       FLOAT NOT NULL,
-PRIMARY KEY (ID)
+    ID          INT NOT NULL AUTO_INCREMENT,
+    timestamp   DATETIME NOT NULL,
+    message     VARCHAR(120),
+    value       FLOAT NOT NULL,
+    PRIMARY KEY (ID)
 );
 
 
 CREATE OR REPLACE TABLE messages
 (
-ID           TINYINT NOT NULL AUTO_INCREMENT,
-humidity_low VARCHAR(120),
-humidity_high VARCHAR(120),
-temperature_low VARCHAR(120),
-temperature_high VARCHAR(120),
-PRIMARY KEY (ID)
+    ID           TINYINT NOT NULL AUTO_INCREMENT,
+    humidity_low VARCHAR(120),
+    humidity_high VARCHAR(120),
+    temperature_low VARCHAR(120),
+    temperature_high VARCHAR(120),
+    PRIMARY KEY (ID)
 );
 
 CREATE OR REPLACE TABLE thresholds
 (
-ID           TINYINT NOT NULL AUTO_INCREMENT,
-humidity_low FLOAT NOT NULL,
-humidity_high FLOAT NOT NULL,
-temperature_low FLOAT NOT NULL,
-temperature_high FLOAT NOT NULL,
-PRIMARY KEY (ID)
+    ID           TINYINT NOT NULL AUTO_INCREMENT,
+    humidity_low FLOAT NOT NULL,
+    humidity_high FLOAT NOT NULL,
+    temperature_low FLOAT NOT NULL,
+    temperature_high FLOAT NOT NULL,
+    PRIMARY KEY (ID)
 );
 
 -- DEFAULT VALUES

@@ -1,0 +1,6 @@
+{
+  "database": "air",
+  "log_storage": "/home/pi/logs",
+  "observed": "Humidity",
+  "to": ["g.w.mika@gmail.com"]
+}
