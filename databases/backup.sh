@@ -1,5 +1,6 @@
 #!/bin/bash
 
+source ../credentials.sh
 YEAR=$(date +%Y)
 MONTH=$(date +%m)
 DAY=$(date +%d)
