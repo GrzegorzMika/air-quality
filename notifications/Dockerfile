@@ -1,5 +1,11 @@
 FROM python:3.7-buster
 
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG MYSQL_HOST
+ARG AIR_QUALITY_USER
+ARG AIR_QUALITY_PASSWORD
+
 RUN apt-get update && \
     apt-get install mariadb-server -y && \
     apt-get install libv8-dev -y

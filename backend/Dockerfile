@@ -1,6 +1,10 @@
 FROM raspbian/stretch
 FROM arm32v7/python:3.5-buster
 
+ARG MYSQL_USER
+ARG MYSQL_PASSWORD
+ARG MYSQL_HOST
+
 RUN apt-get update && \
     apt-get install libpython3.5 -y
 

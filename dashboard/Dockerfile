@@ -1,5 +1,9 @@
 FROM rocker/shiny
 
+ARG DB_USER
+ARG DB_PASSWORD
+ARG DB_HOST
+
 RUN apt-get update && \
     apt-get install mariadb-server -y && \
     apt-get install libv8-dev -y
