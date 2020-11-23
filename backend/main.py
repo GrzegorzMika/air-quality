@@ -46,7 +46,7 @@ def main():
 
             mydb.commit()
         except Exception as e:
-            logger.error(e)
+            logger.error(e, exc_info=True)
 
 
 if __name__ == '__main__':

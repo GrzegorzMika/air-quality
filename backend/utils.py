@@ -69,7 +69,7 @@ def catch_measurement(sensor, period, wait):
             for i, s in enumerate(sensor):
                 measurement_temporary['sensor_' + str(i)].append(s.measurement)
         except Exception as e:
-            logging.error(e)
+            logging.error(e, exc_info=True)
         finally:
             time.sleep(wait)
 

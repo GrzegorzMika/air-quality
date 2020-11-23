@@ -73,7 +73,7 @@ def check_if_sent(cursor, database, sensor, relaxation):
         cursor.execute(query)
         results = cursor.fetchall()
     except Exception as e:
-        logging.error(e)
+        logging.error(e, exc_info=True)
         results = []
 
     if results:
@@ -98,7 +98,7 @@ def store_info(cursor, database, sensor, info='Notification sent!'):
         cursor.execute(query)
         database.commit()
     except Exception as e:
-        logging.error(e)
+        logging.error(e, exc_info=True)
 
 
 def observe(cursor, database, sensor, lower_threshold, upper_threshold):
@@ -120,7 +120,7 @@ def observe(cursor, database, sensor, lower_threshold, upper_threshold):
         cursor.execute(query)
         results = cursor.fetchall()
     except Exception as e:
-        logging.error(e)
+        logging.error(e, exc_info=True)
         results = [(datetime.now, -1)]
 
     value = results[0][1]

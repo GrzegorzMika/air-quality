@@ -2,7 +2,7 @@
   "database": "air",
   "log_storage": "/home/pi/logs",
   "observed": "temperature",
-  "threshold": [20, 25],
+  "threshold": [24, 25],
   "to": ["g.w.mika@gmail.com"],
   "relaxation": "01:00:00",
   "wait": 60

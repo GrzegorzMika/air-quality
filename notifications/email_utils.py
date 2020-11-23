@@ -37,4 +37,4 @@ def send_email(message):
             smtp.send_message(message)
         logging.info('Message sent successfully.')
     except Exception as e:
-        logging.error(e)
+        logging.error(e, exc_info=True)
