@@ -8,12 +8,15 @@ from server import observe, check_if_sent, store_info, sql_credentials, connect_
 from utils import find
 
 
-def notification_logic(mydb, cursor, database, sensor, lower_threshold, upper_threshold, relaxation, to):
+def notification_logic(username, password, host, database, sensor, lower_threshold, upper_threshold, relaxation, to):
+    mydb, cursor = connect_database(username, password, database, host)
     crossed, value = observe(cursor, database, sensor, lower_threshold, upper_threshold)
     if crossed and not check_if_sent(cursor, database, sensor, relaxation):
         store_info(mydb, cursor, sensor)
         message = compose_email(to, 'Alert notification', sensor, value)
         send_email(message)
+    cursor.close()
+    mydb.close()
 
 
 def main():
@@ -31,10 +34,9 @@ def main():
     lower_threshold, upper_threshold = setup.get('threshold')
     username, password, host = sql_credentials()
 
-    mydb, mycursor = connect_database(username, password, database, host)
-
     def wrap_logic():
-        return notification_logic(mydb, mycursor, database, sensor, lower_threshold, upper_threshold, relaxation, to)
+        return notification_logic(username, password, host, database,
+                                  sensor, lower_threshold, upper_threshold, relaxation, to)
 
     loop = task.LoopingCall(wrap_logic)
     loop.start(wait)
