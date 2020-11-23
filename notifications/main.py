@@ -12,7 +12,7 @@ def notification_logic(username, password, host, database, sensor, lower_thresho
     mydb, cursor = connect_database(username, password, database, host)
     crossed, value = observe(cursor, database, sensor, lower_threshold, upper_threshold)
     if crossed and not check_if_sent(cursor, database, sensor, relaxation):
-        store_info(mydb, cursor, sensor)
+        store_info(cursor, mydb, sensor)
         message = compose_email(to, 'Alert notification', sensor, value)
         send_email(message)
     cursor.close()
