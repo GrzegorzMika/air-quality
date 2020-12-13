@@ -6,7 +6,20 @@ ARG MYSQL_PASSWORD
 ARG MYSQL_HOST
 
 RUN apt-get update && \
-    apt-get install libpython3.5 -y
+    apt-get install libpython3.5 build-essential swig3.0 cmake libjson-c-dev -y
+
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
+
+RUN apt-get install -y nodejs-dev
+
+RUN cd /tmp && \
+        git clone https://github.com/intel-iot-devkit/mraa && \
+        cd mraa && \
+        mkdir build && \
+        cd build && \
+        cmake .. && \
+        make && \
+        make install
 
 ENV TZ=Europe/Warsaw
 
